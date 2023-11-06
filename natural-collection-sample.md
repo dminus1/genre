@@ -6,15 +6,15 @@ reference information.
 
 This repository uses the following classes and the following sources
 
-| Genre       | General prototypes              | \#Texts | Natural source | Topical bias     |
-|-------------|---------------------------------|---------|----------------|------------------|
-| ARGument    | Expressing opinions, editorials | 126755  | Hyperpartisan  | Topics 9, 13     |
-| INSTRuction | Tutorials, FAQs, manuals        | 127472  | StackExchange  | Topics 19, 21    |
-| NEWS        | Reporting newswires             | 16389   | Giga News      | Topics 5, 9      |
-| PERSonal    | Diary entries, travel blogs     | 16432   | ICWSM'09 set   | Topic 23         |
-| INFOrmation | Encyclopedic articles           | 97575   | Wikipedia      | Topics 1, 15, 20 |
-| Review      | Product reviews                 | 1302495 | Amazon reviews | Topics 1, 16, 17 |
-|             | **Total**                       | 1687118 |                |                  |
+| Genre       | General prototypes              | \#Texts | Natural source                         | Topical bias     |
+|-------------|---------------------------------|---------|----------------------------------------|------------------|
+| ARGument    | Expressing opinions, editorials | 126755  | Hyperpartisan from SemEval-2019 Task 4 | Topics 9, 13     |
+| INSTRuction | Tutorials, FAQs, manuals        | 127472  | A sample of StackExchange              | Topics 19, 21    |
+| NEWS        | Reporting newswires             | 16389   | Giga News from LDC                     | Topics 5, 9      |
+| PERSonal    | Diary entries, travel blogs     | 16432   | ICWSM'09 set of personal stories       | Topic 23         |
+| INFOrmation | Encyclopedic articles           | 97575   | A sample of Wikipedia                  | Topics 1, 15, 20 |
+| Review      | Product reviews                 | 1302495 | Amazon reviews                         | Topics 1, 16, 17 |
+|             | **Total**                       | 1687118 |                                        |                  |
 
 Keywords from ukWac for the **topic model** with 25 topics:
 
