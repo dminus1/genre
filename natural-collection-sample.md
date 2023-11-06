@@ -49,3 +49,6 @@ Keywords from ukWac for the **topic model** with 25 topics:
 
 The Amazon reviews are from
 <http://www.cs.jhu.edu/~mdredze/datasets/sentiment/unprocessed.tar.gz>
+
+The full sample is at
+<http://corpus.leeds.ac.uk/serge/webgenres/natural/full-sample.tar.xz>
