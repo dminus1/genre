@@ -5,3 +5,25 @@ The code and data for "BERT Goes Off-Topic: Investigating the Domain Transfer Ch
    
 You can download all the necessary files [here](https://drive.google.com/file/d/1SsJRhy-TYtPBr_pp5JGOoWJKlO3KNRH9/view?usp=sharing) and [here](https://drive.google.com/file/d/1-EAkayPfV0upzEU09dmtmQbawN8VQ1gL/view?usp=sharing). They include slightly re-formatted corpora, the topic models, and other auxiliary files used by the Python code. Change the path from "S:" in the Python code to your downloaded location.
 
+In order to create a dataset with a specificed number of  off-topic documents, run the following command:
+```bash
+python process-both.py --topic 1  --cut 1000 --random --label C1C2-30-0kw  --punct --tops 10   --genre_cap 10000000 --num_bottom 130 --top_topic_reserve 500 --out tmp-aug.tsv --aug
+```
+
+The script accepts the following arguments:
+
+- `--topic` (integer): which topic. E.g. for topic 1 ("entertainment"), the command will extract the LEAST related to entertainment documents
+- `--cut` (integer): number of characters in the extracted document window.
+- `--random` (boolean): whether the document window is randomly positioned
+- `--punct` (boolean): whether to preserve punctuation
+- `--tops` (integer): number of keywords to define the topic
+- `--genre_cap` (integer): max number of documents per genre
+- `--num_bottom` (integer): number of documents per genre to exrtact (e.g. here 100 for validation and 30 for training)
+- `--top_topic_reserve` (integer): this is not important in the current version
+- `--out` (string): the name of the output file that contains the documents for the dataset. Note that the program also creates training files for generating synthetic documents in the specified genre and on the specified topic (topic 1 in this example), with the file names for them here being train-giga-1-C1C2-30-10kw.txt, train-hyper-1-C1C2-30-10kw.txt, train-reviews-1-C1C2-30-10kw.txt etc. "giga" here stands for genre (news). "1"  stands for the topic, and the rest is the label defined by the next argument below.
+- `--label` (string): the label to add to the file names mentioned right above, here C1C2 suggests that both corpus 1 and corpus 2 have been used,  the training size is 30 documents per genre, and the topic is represented by 10 keywords.
+- `--aug` (boolean): whether to create the training files mentioned right above
+  
+  
+
+
