@@ -1,4 +1,4 @@
-# Copyright (C) 2019  Dmitri Roussinov
+# Copyright (C) 2022-2023  Dmitri Roussinov
 # This program is free software under GPL 3, see http://www.gnu.org/licenses/
 '''
 This code creates on-topic and off-topic datasets based on the corpora with several genres.
