@@ -9,8 +9,7 @@ In order to create a dataset with a specificed number of  off-topic documents, r
 ```bash
 python process-both.py --topic 1  --cut 1000 --random --label C1C2-30-0kw  --punct --tops 10   --genre_cap 10000000 --num_bottom 130 --top_topic_reserve 500 --out tmp-aug.tsv --aug
 ```
-
-The script accepts the following arguments:
+This should create the file "tmp-aug.tsv" uploaded here for comparison. The script accepts the following arguments:
 
 - `--topic` (integer): which topic. E.g. for topic 1 ("entertainment"), the command will extract the LEAST related to entertainment documents
 - `--cut` (integer): number of characters in the extracted document window.
@@ -28,6 +27,8 @@ There are a few more commands to futher re-organize training, validation and tes
 ```bash
 python combine-aug.py --strip_punct --inp tmp-aug.tsv  --out tmp-bottom-nop.tsv
 ```
+The output "tmp-bottom-nop.tsv" is uploaded for comparison.
+
 We are using the same test sets (100 documents per genre) for all sample sizes in the paper (30, 100 and 1000) so we can directly compare the performance. Those test sets should be extracted from the archive "test-sets.zip" and placed into the folder "classifier/data". The commands to re-create obtaining them are below. This command simply verifies that the test set does not overlap with the training and validation sets that are currently contained in tmp-bottom-nop.tsv:
 ```bash
 python combine-aug.py --test_set classifier/data/test-single-topic-1-C1C2-1k-100-nop.tsv --inp tmp-bottom-nop.tsv
