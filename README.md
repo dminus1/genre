@@ -23,7 +23,16 @@ The script accepts the following arguments:
 - `--out` (string): the name of the output file that contains the documents for the dataset. Note that the program also creates training files for generating synthetic documents in the specified genre and on the specified topic (topic 1 in this example), with the file names for them here being train-giga-1-C1C2-30-10kw.txt, train-hyper-1-C1C2-30-10kw.txt, train-reviews-1-C1C2-30-10kw.txt etc. "giga" here stands for genre (news). "1"  stands for the topic, and the rest is the label defined by the next argument below.
 - `--label` (string): the label to add to the file names mentioned right above, here C1C2 suggests that both corpus 1 and corpus 2 have been used,  the training size is 30 documents per genre, and the topic is represented by 10 keywords.
 - `--aug` (boolean): whether to create the training files mentioned right above
-  
+
+There are a few more commands to futher re-organize training, validation and testing files. This one simply removes punctuation:
+```bash
+python combine-aug.py --strip_punct --inp tmp-aug.tsv  --out tmp-bottom-nop.tsv
+```
+We are using the same test sets (100 documents per genre) for all sample sizes in the paper (30, 100 and 1000) so we can directly compare the performance. Those test sets should be extracted from the archive "test-sets.zip" and placed into the folder "classifier/data". The commands to re-create obtaining them are below. This command simply verifies that the test set does not overlap with the training and validation sets that are currently contained in tmp-bottom-nop.tsv:
+```bash
+python combine-aug.py --test_set classifier/data/test-single-topic-1-C1C2-1k-100-nop.tsv --inp tmp-bottom-nop.tsv
+```
+
   
 
 
