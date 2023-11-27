@@ -33,6 +33,11 @@ We are using the same test sets (100 documents per genre) for all sample sizes i
 ```bash
 python combine-aug.py --test_set classifier/data/test-single-topic-1-C1C2-1k-100-nop.tsv --inp tmp-bottom-nop.tsv
 ```
+This command splits "tmp-bottom-nop.tsv" into training and validation sets as files "train-bottom-1-C1C2-30-0kw.tsv" and "val-bottom-1-C1C2-30-10kw.tsv" in classifier/data, also uploaded here for comparison:
+```bash
+python combine-aug.py --reduce_to 30 --test_set classifier/data/val-bottom-1-C1C2-30-10kw.tsv  --out classifier/data/train-bottom-1-C1C2-30-0kw.tsv --inp tmp-bottom-nop.tsv
+```
+
 
   
 
