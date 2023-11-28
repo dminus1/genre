@@ -50,6 +50,11 @@ python process-both.py --topic 1  --cut 1000 --random --label C1C2-30  --punct -
 Additional arguments:
 - `--num_top` (integer): how many on-topic documents per genre to extract
 - `--ids_exclude` (string): the test file provides document IDs that needs to be excluded from training and testing sets to avoid overlaps.
-  
+
+If you want to re-create the test sets, can use the following command:
+```bash
+python process-both.py --topic 1  --cut 1000 --random --label C1C2-1k  --punct --tops 10   --genre_cap 10000000 --num_top 200 --out tmp-top.tsv
+```
+then remove the punctuation and split into testig and validation sets (each 100 per genre) as shown above.
 
 
