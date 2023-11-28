@@ -44,7 +44,7 @@ The script accepts the following arguments:
 
 To create on-topic training documents, you can use the following command followed by similar punctuation removal and split commands as above:
 ```bash
-python process-both.py --topic 1  --cut 1000 --random --label C1C2-30  --punct --tops 10   --genre_cap 10000000 --num_top 130 --ids_exclude classifier/data/test-single-topic-6-C1C2-1k-100-nop.tsv --out tmp-top.tsv
+python process-both.py --topic 1  --cut 1000 --random --label C1C2-30  --punct --tops 10   --genre_cap 10000000 --num_top 130 --ids_exclude classifier/data/test-single-topic-1-C1C2-1k-100-nop.tsv --out tmp-top.tsv
 ```
 Additional arguments:
 - `--num_top` (integer): how many on-topic documents per genre to extract
