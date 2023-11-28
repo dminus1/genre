@@ -1,4 +1,6 @@
-The code and data for "BERT Goes Off-Topic: Investigating the Domain Transfer Challenge in Genre Classification" by Dmitri Roussinov, Serge Sharoff,  EMNLP Findings, 2023
+**The code and data for "BERT Goes Off-Topic: Investigating the Domain Transfer Challenge in Genre Classification" by Dmitri Roussinov, Serge Sharoff,  EMNLP Findings, 2023**
+
+Here, you can find all the corpus and source files to re-create our experiments. Also, if running into difficulties re-creating the data sets, there are the datasets uploaded here for topic 1 so you can simply verify the gap between using on-topic and off-topic documents to train a genre classifier. This is the **main result** reported in our paper.
 
 **1. Creating on-topic and off-topic datasets.**
    
@@ -42,15 +44,23 @@ The script accepts the following arguments:
 - `--inp` (string): input dataset
 - `--inp` (test_set): testing set name to verify that it does not overlap with training or validation sets
 
-To create on-topic training documents, you can use the following command followed by similar punctuation removal and split commands as above:
+To create on-topic training documents, you can use the following command:
 ```bash
 python process-both.py --topic 1  --cut 1000 --random --label C1C2-30  --punct --tops 10   --genre_cap 10000000 --num_top 130 --ids_exclude classifier/data/test-single-topic-1-C1C2-1k-100-nop.tsv --out tmp-top.tsv
 ```
 Additional arguments:
 - `--num_top` (integer): how many on-topic documents per genre to extract
 - `--ids_exclude` (string): the test file provides document IDs that needs to be excluded from training and testing sets to avoid overlaps.
+  
+After that,  similar to the above, you can run the following commands to remove punctuation and split into training and validation files called "train-top-1-C1C2-30-10kw.tsv" and "val-top-1-C1C2-30-10kw.tsv" accordingly:
+```bash
+python combine-aug.py --strip_punct --inp tmp-top.tsv  --out tmp-top-nop.tsv
+python combine-aug.py --test_set classifier/data/test-single-topic-1-C1C2-1k-100-nop.tsv --inp tmp-top-nop.tsv
+python combine-aug.py --reduce_to 30 --test_set classifier/data/val-top-1-C1C2-30-10kw.tsv  --out classifier/data/train-top-1-C1C2-30-10kw.tsv --inp tmp-bottom-nop.tsv
+```
+The training and testing files are also uploaded to the "classifier/data" folder for comparison.
 
-If you want to re-create the test sets, can use the following command:
+If you want to re-create the test sets, you can use the following command:
 ```bash
 python process-both.py --topic 1  --cut 1000 --random --label C1C2-1k  --punct --tops 10   --genre_cap 10000000 --num_top 200 --out tmp-top.tsv
 ```
