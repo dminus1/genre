@@ -66,4 +66,27 @@ python process-both.py --topic 1  --cut 1000 --random --label C1C2-1k  --punct -
 ```
 then remove the punctuation and split into testig and validation sets (each 100 per genre) as shown above.
 
+**2. Comparing on-topic and off-topic training.**
+
+To test a Roberta-based classifier with an off-topic training set, the following command can be used:
+```bash
+python BertTrainerRoberta.py --log_label sample-30-classifier-roberta-large  --warmup_steps 160  --input_test data/test-single-topic-1-C1C2-1k-100-nop.tsv --input data/train-bottom-1-C1C2-30-10kw.tsv  --bert_model roberta-large --per_device_train_batch_size 1 --output_dir topic-1-C1C2-30-roberta-large   --logging_steps 96 --gradient_accumulation_steps 15 --seg_size 256  --num_train_epochs 36  --learning_rate 1e-05 --input_val data/val-bottom-1-C1C2-30-10kw.tsv --auto_val
+```
+Additional (not explained above) arguments:
+- `--log_label` (string): the name of the log file with additional details.
+- `--warmup_steps` (integer): number of warm up steps when training, simply passed to a Hugging Face function call.
+- `--input_test` (string): the name of the testing set file
+- `--input` (string): the name of the training set file
+- `--bert_model` (string): this can be used to specify to use a base version, simply passed to a Hugging Face function call.
+- `--per_device_train_batch_size` (integer): simply passed to a Hugging Face function call
+- `--output_dir` (string): the name of the folder with the saved models.
+- `--logging_steps` (integer): how often to test the model.
+- `--gradient_accumulation_steps` (integer): simply passed to a Hugging Face function call
+- `--seg_size` (integer):  max number of tokens in the input to the transformer model
+- `--num_train_epochs` (integer):  how many epochs to train (there is no early stopping)
+- `--learning_rate` (float):  simply passed to a Hugging Face function call
+- `--input_val` (string): the name of the validatio set file.
+- `--bert_model` (auto_val): wether to report F1 on the test set corresponding to the highest F1 on the validation set
+
+
 
