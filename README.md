@@ -87,6 +87,13 @@ Additional (not explained above) arguments:
 - `--learning_rate` (float):  simply passed to a Hugging Face function call
 - `--input_val` (string): the name of the validatio set file.
 - `--bert_model` (auto_val): wether to report F1 on the test set corresponding to the highest F1 on the validation set
+The max validation F1 score reported when running this command should be around .93 +- .02 depending on the seed and number of shuffles. This corresponds to F1 on the test set around .49 +- 0.02.
 
+To test a Roberta-based classifier with an on-topic training set, the following command can be used:
+```bash
+python BertTrainerRoberta.py --log_label sample-30-classifier-roberta-large-on-topic  --warmup_steps 160  --input_test data/test-single-topic-1-C1C2-1k-100-nop.tsv --input data/train-top-1-C1C2-30-10kw.tsv  --bert_model roberta-large --per_device_train_batch_size 1 --output_dir topic-1-C1C2-30-roberta-large   --logging_steps 96 --gradient_accumulation_steps 15 --seg_size 256  --num_train_epochs 36  --learning_rate 1e-05 --input_val data/val-top-1-C1C2-30-10kw.tsv --auto_val
+```
+The max validation F1 score reported when running this command should be around .92 +- .02. This corresponds to F1 on the test set around .89 +- 0.02. Thus, for this and other topics, the on-topic training results are better than off-topic training results
+by about 25 absolute percentage points on average. This is the main finding in our paper.
 
 
