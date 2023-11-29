@@ -56,7 +56,7 @@ After that,  similar to the above, you can run the following commands to remove 
 ```bash
 python combine-aug.py --strip_punct --inp tmp-top.tsv  --out tmp-top-nop.tsv
 python combine-aug.py --test_set classifier/data/test-single-topic-1-C1C2-1k-100-nop.tsv --inp tmp-top-nop.tsv
-python combine-aug.py --reduce_to 30 --test_set classifier/data/val-top-1-C1C2-30-10kw.tsv  --out classifier/data/train-top-1-C1C2-30-10kw.tsv --inp tmp-bottom-nop.tsv
+python combine-aug.py --reduce_to 30 --test_set classifier/data/val-top-1-C1C2-30-10kw.tsv  --out classifier/data/train-top-1-C1C2-30-10kw.tsv --inp tmp-top-nop.tsv
 ```
 The training and testing files are also uploaded to the "classifier/data" folder for comparison.
 
