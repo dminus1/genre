@@ -62,7 +62,7 @@ The training and testing files are also uploaded to the "classifier/data" folder
 
 If you want to re-create the test sets, you can use the following command:
 ```bash
-python process-both.py --topic 1  --cut 1000 --random --label C1C2-1k  --punct --tops 10   --genre_cap 10000000 --num_top 200 --out tmp-top.tsv
+python process-both.py --topic 1  --cut 1000 --random --label C1C2-1k  --punct --tops 10   --genre_cap 10000000 --num_top 130 --out tmp-top.tsv
 ```
 then remove the punctuation and split into testig and validation sets (each 100 per genre) as shown above.
 
