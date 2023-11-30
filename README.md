@@ -96,4 +96,11 @@ python BertTrainerRoberta.py --log_label sample-30-classifier-roberta-large-on-t
 The max validation F1 score reported when running this command should be around .92 +- .02. This corresponds to F1 on the test set around .89 +- 0.02. Thus, for this and other topics, the on-topic training results are better than off-topic training results
 by about 25 absolute percentage points on average. This is the main finding in our paper.
 
+**3. Augmenting off-topic datasets by synthetic on-topic data**
 
+Note: For this, we used [Simple Transformers](https://simpletransformers.ai/) library  instead of Hugging Face used for our classifier, so this needs to be run in different environments, with different "requirements.txt" files posted accordingly.
+
+Training a generator for synthetic texts can be accomplished by running the following command:
+```bash
+python train-genre.old.org.small.py --batches 32   --model t5-small --size 256  --epoch 48  --out hyper-1-C1C2-30 --inp   train-hyper-1-C1C2-30.txt 
+```
