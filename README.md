@@ -104,3 +104,10 @@ Training a generator for synthetic texts can be accomplished by running the foll
 ```bash
 python train-genre.old.org.small.py --batches 32   --model t5-small --size 256  --epoch 48  --out hyper-1-C1C2-30 --inp   train-hyper-1-C1C2-30.txt 
 ```
+To generate synthetic on-topic augmentation documents, first we need to extract the keywords from the test set. This accomlishes domain adaption. Since the genre labels are not used, it is methodologically acceptable as "inference-time" optimization. An example of an extraction command:
+```bash
+python process-both.py --topic 1  --cut 1000 --random --label 1000-r  --punct --tops 10 --data --by_topics --keywords_from_test --inp classifier/data/test-single-topic-1-C1C2-1k-100-nop.tsv --out  classifier/data/test-single-topic-1-C1C2-10kw-keywords.tsv --genre_cap 100000
+```
+Most of the arguments are not used except input file, output file and "--tops". Our keyword extraction algorithm is described in our paper. An example of the output file is posted for comparison.
+
+
