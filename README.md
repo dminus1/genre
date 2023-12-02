@@ -113,5 +113,15 @@ To generate synthetic on-topic augmentation documents, first we need to extract 
 python process-both.py --topic 1  --cut 1000 --random --label 1000-r  --punct --tops 10 --data --by_topics --keywords_from_test --inp classifier/data/test-single-topic-1-C1C2-1k-100-nop.tsv --out  classifier/data/test-single-topic-1-C1C2-10kw-keywords.tsv --genre_cap 100000
 ```
 Most of the arguments are not used except input file, output file and "--tops". Our keyword extraction algorithm is described in our paper. An example of the output file is posted for comparison.
-
+Now, the synthetic texts can be generated for a specified topic and genre by the following command:
+```bash
+python generate-print-genre.py --batches 32 --model hyper-1-C1C2-30 --out train-aug-hyper-1-C1C2-30-130x6.1.txt --inp classifier/data/test-single-topic-1-C1C2-10kw-keywords.tsv --maxl 1200 --cap 130
+```
+It may report "ValueError" after running, but still creates the requested output. An example of the output "train-aug-hyper-1-C1C2-30-130x6.1.txt" is provided for comparison.
+Additional arguments:
+- `--cap` (integer): how many to generate. Here, 30 for augmenting training and 100 for augmenting validation sets accordingly.
+- `--maxl` (integer): max number of tokens to output.
+- `--model` (string): the name of the model. Should match the one used in the preceding commands. Here, only for hyperpartizan genre.
+- `--batches` (integer): number of parallel batches for generating.
+- `--inp` (string): the keywords file. Should match the one used in the preceding commands.
 
