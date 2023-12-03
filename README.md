@@ -1,7 +1,6 @@
 **The code and data for "BERT Goes Off-Topic: Investigating the Domain Transfer Challenge in Genre Classification" by Dmitri Roussinov, Serge Sharoff,  EMNLP Findings, 2023**
 
 Here, you can find all the corpus and source files to re-create our experiments. Also, if running into difficulties re-creating the data sets, there are the datasets uploaded here for topic 1 so you can simply verify the gap between using on-topic and off-topic documents to train a genre classifier. This is the **main result** reported in our paper.
-
 **1. Creating on-topic and off-topic datasets.**
    
 You can download all the necessary files [here](https://drive.google.com/file/d/1SsJRhy-TYtPBr_pp5JGOoWJKlO3KNRH9/view?usp=sharing) and [here](https://drive.google.com/file/d/1-EAkayPfV0upzEU09dmtmQbawN8VQ1gL/view?usp=sharing). They include slightly re-formatted corpora, the topic models, and other auxiliary files used by the Python code. Change the path from "S:" in the Python code to your downloaded location.
@@ -117,7 +116,7 @@ Now, the synthetic texts can be generated for a specified topic and genre by the
 ```bash
 python generate-print-genre.py --batches 32 --model hyper-1-C1C2-30 --out train-aug-hyper-1-C1C2-30-130x6.1.txt --inp classifier/data/test-single-topic-1-C1C2-10kw-keywords.tsv --maxl 1200 --cap 130
 ```
-It may report "ValueError" after running, but still creates the requested output. An example of the output "train-aug-hyper-1-C1C2-30-130x6.1.txt" is provided for comparison.
+It may report "ValueError" after running, but still creates the requested output. The examples of the outputs for all the genres used are provided for comparison ("train-aug-*-1-C1C2-30-130x6.1.txt" ).
 Additional arguments:
 - `--cap` (integer): how many to generate. Here, 30 for augmenting training and 100 for augmenting validation sets accordingly.
 - `--maxl` (integer): max number of tokens to output.
