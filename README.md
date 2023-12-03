@@ -146,3 +146,12 @@ Additional arguments:
 - `--no_org` (boolean): if to include any original texts in the resulting dataset. Note: here we don't include them. Instead, we mix them by the commands run right after this one.
 - `--overlap_ok` (string): should be true
  
+Finally, similarly to the original results above, the classification accuracy of the augmented training and validation sets can be tested by the following command (in the "classifier" subfolder and the environment with HuggingFace):
+```bash
+python BertTrainerRoberta.py --log_label sample-30-classifier-roberta-large  --warmup_steps 160  --input_test data/test-single-topic-1-C1C2-1k-100-nop.tsv --input data/train-aug-merged-val-1-C1C2-30.tsv  --bert_model roberta-large --per_device_train_batch_size 1 --output_dir topic-1-C1C2-30-roberta-large-aug   --logging_steps 96 --gradient_accumulation_steps 15 --seg_size 256  --num_train_epochs 18  --learning_rate 1e-05 --input_val data/val-aug-1-C1C2-30-10kw.tsv --auto_val
+```
+Here,  the command reports F1 around .51 +- 0.02, which is only slightly better than the original. Overall, our paper demonstrate 2-6 percentage point increases in F1 averaged across all topics due to augmentation.
+
+Email us for additional code on our ablaition studies if needed.
+
+
