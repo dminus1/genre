@@ -114,13 +114,35 @@ python process-both.py --topic 1  --cut 1000 --random --label 1000-r  --punct --
 Most of the arguments are not used except input file, output file and "--tops". Our keyword extraction algorithm is described in our paper. An example of the output file is posted for comparison.
 Now, the synthetic texts can be generated for a specified topic and genre by the following command:
 ```bash
-python generate-print-genre.py --batches 32 --model hyper-1-C1C2-30 --out train-aug-hyper-1-C1C2-30-130x6.1.txt --inp classifier/data/test-single-topic-1-C1C2-10kw-keywords.tsv --maxl 1200 --cap 130
+python generate-print-genre.py --batches 32 --model hyper-1-C1C2-30 --out train-aug-hyper-1-C1C2-30-130x6.1.txt --inp classifier/data/test-single-topic-1-C1C2-10kw-keywords.tsv --maxl 1200 --cap 200
 ```
 It may report "ValueError" after running, but still creates the requested output. The examples of the outputs for all the genres used are provided for comparison ("train-aug-*-1-C1C2-30-130x6.1.txt" ).
 Additional arguments:
-- `--cap` (integer): how many to generate. Here, 30 for augmenting training and 100 for augmenting validation sets accordingly.
+- `--cap` (integer): how many to generate. Here, 30 for augmenting training and the rest for augmenting the validation sets accordingly.
 - `--maxl` (integer): max number of tokens to output.
 - `--model` (string): the name of the model. Should match the one used in the preceding commands. Here, only for hyperpartizan genre.
 - `--batches` (integer): number of parallel batches for generating.
 - `--inp` (string): the keywords file. Should match the one used in the preceding commands.
 
+Note that after early tests we decided not to augment with synthetic texts of the "stories" genre.
+
+To combine the synthetic texts into augmented training and validation sets, run the following commands:
+```bash
+python combine-aug.py --topic 1 --rep 1    --label  C1C2-30-130x6  --clean   --nopunct --compensate 200 --exclude_products --shuffle 1 --out tmp-comb-aug.tsv --gens 1 --org classifier/data/train-bottom-1-C1C2-30-10kw.tsv --org_rep 1 --no_org
+python combine-aug.py --reduce_to 30 --test_set tmp-val.tsv  --out tmp-aug-merged-minus-val.tsv --inp tmp-comb-aug.tsv
+python combine-aug.py --merge tmp-aug-merged-minus-val.tsv --inp classifier/data/train-bottom-1-C1C2-30-10kw.tsv  --out classifier/data/train-aug-merged-val-1-C1C2-30.tsv --overlap_ok
+python combine-aug.py --merge tmp-val.tsv --inp classifier/data/val-bottom-1-C1C2-30-10kw.tsv  --out classifier/data/val-aug-1-C1C2-30-10kw.tsv --overlap_ok
+```
+Additional arguments:
+- `--rep` (integer): how many times to repeat the synthetic documents.
+- `--label` (string): the part of the file name to match the files with generated texts. Here, we used "C1C2-30-130x6", which should have actually been "C1C2-30-200x6" since we generated 200 documents of each genre rather than 130. But this is just a label, so the number itself does not affect anything.
+- `--clean` (boolean): if to apply the same pre-processing that was applied to the original texts in the corpus
+- `--nopunct` (boolean): if to remove punctiation as with the original texts in the corpus
+- `--compensate` (integer): how many random texts to add from the original dataset if for some reason the file with synthetic texts is missing. This is for the "stories" genre, as noted above. Should normally match "-- cap" option above.
+- `--exclude_products` (boolean): should be "true" for the experiments for our paper since we did not use "products" genre in it.
+- `--shuffle` (integer): how many times to shuffle the combined dataset
+- `--gens` (integer): used only if multiple rounds of synthetic generation applied
+- `--gens` (org_rep): how many times to repeat the original texts
+- `--no_org` (boolean): if to include any original texts in the resulting dataset. Note: here we don't include them. Instead, we mix them by the commands run right after this one.
+- `--overlap_ok` (string): should be true
+ 
